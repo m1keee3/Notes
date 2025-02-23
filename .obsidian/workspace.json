@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Подготовка к собесу/Golang/Slices.md",
+                "file": "Подготовка к собесу/Golang/Замыкания.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Slices"
+              "title": "Замыкания"
             }
           }
         ]
@@ -170,6 +170,8 @@
   },
   "active": "acb24f4dbadec7f2",
   "lastOpenFiles": [
+    "Подготовка к собесу/Golang/Map.md",
+    "Подготовка к собесу/Golang/Замыкания.md",
     "Подготовка к собесу/Golang/Память.md",
     "Подготовка к собесу/Golang/Slices.md",
     "Pasted image 20250221202219.png",

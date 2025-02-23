@@ -3,7 +3,7 @@
 ##### Инициализация
 ```
 1. list := []int
-2. list :+ make([]int, len, cap)
+2. list := make([]int, len, cap)
 ```
 
 #### Функция append
