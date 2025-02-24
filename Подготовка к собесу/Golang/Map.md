@@ -1,7 +1,7 @@
 ##### Инициализация
 ```
 1. m := map[string]int{}
-2. m := make(map[string]int)
+2. m := make(map[string]int, n) // n - число элементов
 ```
 
 Как не надо: 
