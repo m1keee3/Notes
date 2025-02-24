@@ -1,9 +1,18 @@
 ##### Инициализация
 ```
-1. m := map[string]int
+1. m := map[string]int{}
 2. m := make(map[string]int)
 ```
 
+Как не надо: 
+
+```
+var m map[int]int  // Объявляем, но не инициализируем map
+m[12] = 3          // Попытка записи в nil map
+fmt.Println(m)
+
+// panic: assignment to entry in nil map
+```
 #### Что из себя представляет 
 
 **Операции выполняются за O(1)**
