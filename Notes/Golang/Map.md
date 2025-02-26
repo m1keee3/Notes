@@ -13,10 +13,11 @@ fmt.Println(m)
 
 // panic: assignment to entry in nil map
 ```
-#### Что из себя представляет 
+#### Что из себя представляет map
 
-**Операции выполняются за O(1)**
-Использует хэширование
+Операции выполняются за O(1)б благодаря хэшированию
+
+Как выглядит map header:
 
 ```
 type hmap struct {
@@ -28,6 +29,9 @@ type hmap struct {
     hash       uint32 // seed для крипто устойчивости мапы
 }
 ```
+
+Map не использует `generics` или `interface{}`, а использует `unsafe.Poiner` (указатель на любой тип данных)
+Для того чтобы понимать с каким типом мы работаем используется `type discriptor`
 
 #### Что может быть ключом map?
 
@@ -41,11 +45,9 @@ type hmap struct {
 - Функции
 - Мапы
 
-Для того чтобы понимать с каким типом мы работаем используется type discriptor
-
 ---
 
-##### Type descriptor
+#### Type descriptor
 Хранит всю мета информацию о типе
 Предоставляет операции hash, equal, copy
 ```
@@ -53,6 +55,7 @@ type _type struct {
 	size uintptr
 	equal func(unsafe.Pointer, unsafe.Pointer)bool
 	hash func(unsafe.Pointer, uintptr)uintptr
+	...
 }
 ```
 
