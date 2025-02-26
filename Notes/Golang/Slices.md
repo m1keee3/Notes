@@ -3,9 +3,25 @@
 ##### Инициализация
 ```
 1. list := []int
-2. list := make([]int, len, cap)
+2. list := make([]int, len, cap) // Выделяет массив на куче
 ```
 
+#### Структура
+
+```
+type SliceHeader struct {
+    Data uintptr // Указатель на underlying массив
+    Len  int     // Текущая длина
+    Cap  int     // Общая емкость
+}
+```
+
+`Underlaying array` - почти всегда находится на куче, кроме случаев когда срез создается из статического массива:
+
+```
+arr := [5]int{1, 2, 3, 4, 5} // Массив на стеке 
+s := arr[:] // Срез ссылается на массив на стеке
+```
 
 ---
 
@@ -81,11 +97,22 @@ fmt.Println(len(s), cap(s))  // 4 6
 
 ```
 a1 := make([]int, 0, 10)
-  a1 = append(a1, []int{1, 2, 3, 4, 5}...)
-  a2 := append(a1, 6)
-  a3 := append(a1, 7)
-  fmt.Println(a1, a2, a3) // [1 2 3 4 5] [1 2 3 4 5 7] [1 2 3 4 5 7]
+a1 = append(a1, []int{1, 2, 3, 4, 5}...)
+a2 := append(a1, 6)
+a3 := append(a1, 7)
+fmt.Println(a1, a2, a3) // [1 2 3 4 5] [1 2 3 4 5 7] [1 2 3 4 5 7]
 ```
+
+**Пример Dangling pointer**
+
+```
+arr := make([]int, 5)  
+p := &arr[0]  
+arr = append(arr, 1)  
+fmt.Println(*p)
+```
+
+В данном примере p ссылается на мертвую память
 
 ---
 
