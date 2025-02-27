@@ -26,6 +26,11 @@ type ReadCloser interface {
 func Println(a ...interface{}) { ... }
 ```
 
+
+---
+
+#### Утверждение типа (type assertion)
+
 **Утверждение типа (type assertion)** - это извлечение определенного типа из пустого интерфейса
 
 ```
@@ -60,5 +65,18 @@ func Describe(v interface{}) {
     default:
         fmt.Println("Неизвестный тип")
     }
+}
+```
+
+
+---
+
+#### Errors
+
+**Error interface** позволяет реализовывать кастомные error
+
+```
+type error interface {
+    Error() string
 }
 ```
