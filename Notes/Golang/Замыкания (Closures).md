@@ -28,6 +28,8 @@ func foo() func() int {
 
 **\*Замыкания захватывают переменные по ссылке а не копируют их**
 
+Вот несколько примеров:
+
 ```
 funcs := []func(){}
 
@@ -64,3 +66,29 @@ for _, f := range funcs {
 ```
 
 В Go можно объявлять переменную с тем же именем в более узком scope 
+
+**Пример через defer**
+
+```
+i := 1  
+  
+defer func() {  
+    fmt.Println(i, "first defer")  
+}()  
+defer fmt.Println(i, "first print")  
+  
+i = 2  
+  
+defer func() {  
+    fmt.Println(i, "second defer")  
+}()  
+defer fmt.Println(i, "second print")
+
+// Вывод
+2 second print
+2 second defer
+1 first print
+2 first defer
+```
+
+Так получается потому что в `fmt.Print()` мы подаем копию

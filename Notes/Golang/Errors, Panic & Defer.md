@@ -101,6 +101,24 @@ second defer 1
 first defer 1
 ```
 
+
+#### Интересный пример с замыканием
+
+```
+func sum(a, b int) (sum int) {
+	defer func() {
+		sum *= 2
+	}
+
+	sum = a + b
+	return
+}
+
+fmt.Print(sum(2, 3)) // 10
+```
+
+---
+
 ### Panic & Defer
 
 Когда происходит `panic`, все отложенные функции (`defer`) в текущей функции выполняются перед завершением программы. Это делает `defer` полезным для очистки ресурсов даже в случае аварийного завершения.
@@ -165,3 +183,5 @@ Performing risky operation
 Recovered from panic: Something went wrong!
 End
 ```
+
+Функция `recover()` возвращает значение переданное в `panic()`
