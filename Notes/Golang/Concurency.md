@@ -84,6 +84,83 @@ wg.Wait() // дожидается выполнения всех горутин
 
 Вывод чисел будет в рандомном порядке
 
+### Data race
+
+`Data race` - это множественное обращение к одним и тем же данным из разных горутин, где хотя бы одно из этих обращений запись
+
+Рассмотрим две программы:
+
+Выполнение функции в одной горутине
+```
+start := time.Now()  
+ctr := 0  
+  
+for i := 0; i < 1000; i++ {  
+    func() {  
+       ctr++  
+       time.Sleep(time.Nanosecond)  
+    }()  
+}  
+  
+fmt.Println(ctr)                             // 1000
+fmt.Println(time.Now().Sub(start).Seconds()) // 0.5157675
+```
+
+Выполнение функции в нескольких горутинах
+``` 
+wg := sync.WaitGroup{}  
+start := time.Now()  
+ctr := 0  
+
+wg.Add(1000)  
+
+for i := 0; i < 1000; i++ {  
+   go func() {  
+	  defer wg.Done()  
+	  ctr++  
+	  time.Sleep(time.Nanosecond)  
+   }()  
+}  
+wg.Wait()  
+
+fmt.Println(ctr)                             // 980  
+fmt.Println(time.Now().Sub(start).Seconds()) // 0.0026929  
+
+```
+
+Это своего рода UB поскольку горутины не знают друг о друге и могут выполнять одни и те же операции как в данном случае инкремент
+
+### Mutex
+
+`sync.Mutex` - это механизм, который предотвращает одновременный доступ нескольких горутин к общему ресурсу. Он используется для защиты критических секций кода, где возможны `data race`.
+
+```
+wg := sync.WaitGroup{}  
+start := time.Now()  
+ctr := 0  
+m := sync.Mutex{}  
+  
+wg.Add(1000)  
+  
+for i := 0; i < 1000; i++ {  
+    go func() {  
+       defer wg.Done()  
+       m.Lock()  
+       ctr++  
+       m.Unlock()  
+       time.Sleep(time.Nanosecond)  
+    }()  
+}  
+wg.Wait()  
+  
+fmt.Println(ctr)                             // 1000  
+fmt.Println(time.Now().Sub(start).Seconds()) // 0.0025548
+```
+
+
+
+
+
 ## Каналы (Channels)
 
 ## Планировщик (Scheduler)
