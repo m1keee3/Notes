@@ -220,9 +220,9 @@ strChan := make(chan string)
 
 ```
 type hchan struct {
-	mx sync.mutex
-	buffer []T
-	readers []Goroutines // очередь на чтение
+	mx      sync.mutex  
+	buffer  []T          // у буферизированных  
+	readers []Goroutines // очередь на чтение  
 	writers []Goroutines // очередь на запись
 }
 ```
@@ -266,15 +266,63 @@ nilChan <- 10 // Запись в пустой канале приводит к D
 
 #### Закрытие канала
 
+Эта операция запрещает запись в канал, но чтение из закрытого канала не запрещено.
+
 ```
 chan nilChan chan int
 close(nilChan) // panic: close of nil channel
 ```
 
 Вывод: нельзя закрыть nil канал
+
+Запись в закрытый канал
+
+```
+ch := make(chan int)  
+close(ch)  
+ch <- 1
+
+// panic: send on closed channel
+```
+
+Закрытие закрытого канала
+
+```
+ch := make(chan int)  
+close(ch)  
+close(ch)
+
+//panic: close of closed channel
+```
+
+
+---
+
 #### Буферизированный и не буферизированный канал
 
 
+
+#### Направленные каналы
+
+Канал для чтения
+
+```
+readChan := make(<-chan int)
+```
+
+Канал для записи
+
+```
+writeChan := make(chan<- int)
+```
+
+Создание таких каналов не имеет смысла, это нужно для того чтобы показать как функция будет работать с каналом, то есть используется в **сигнатурах функций**.
+
+```
+func foo(ch <-chan int) {} 
+```
+
+В такую функцию можно подать двунаправленный канал, но функция сможет работать с ним только как с однонаправленным
 
 ---
 
