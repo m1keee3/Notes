@@ -42,6 +42,8 @@ go func() {
 fmt.Println(ctx.Err()) // context canceled 
 ```
 
+Контекст лучше отменять на том же уровне где он создается.
+
 ##### 4. `context.WithTimeout(parent, duration)`
 
 Контекст отменяется через указанное время.
