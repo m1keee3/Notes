@@ -1,6 +1,64 @@
 Интерфейс в Go — это набор методов (сигнатур функций), которые должны быть реализованы типом, чтобы он считался удовлетворяющим этому интерфейсу.
 
+Рассмотрим  такой пример:
 
+```
+type Word struct {  
+    name     string  
+    priority uint  
+}  
+  
+type Foo interface {  
+    foo()  
+}  
+  
+func (w *Word) foo() {  
+    fmt.Println("call foo()")  
+}  
+  
+func call(f Foo) {  
+    if f != nil {  
+       f.foo()  
+    } else {  
+       fmt.Println("f null")  
+    }  
+}  
+  
+func main() {  
+    var f1 *Word  
+    call(f1)  
+}
+
+// Вывод 
+// call foo()
+```
+
+Для того чтобы понять почему так происходит разберемся с интерфейсом.
+
+Интерфейсная переменная содержит два компонента:
+
+- **Динамический тип** (тип реализации).
+    
+- **Динамическое значение** (конкретное значение).
+
+```
+type iface struct {
+	tab  *itab
+	data unsafe.Pointer
+}
+```
+
+`data` - это непосредственно наш f1 из примера. Вся информация по методам, типам и прочему скрывается в `tab` - интерфейсной таблицей (interface table).
+
+```
+type itab struct {
+	inter *interfacetype
+	_type *_type
+	hash  uint32 // copy of _type.hash. Used for type switches.
+	_     [4]byte
+	fun   [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter.
+}
+```
 
 #### Встраивание интерфейсов
 
