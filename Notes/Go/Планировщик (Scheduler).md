@@ -141,4 +141,4 @@
 
 ### Network Poller
 
-Некоторые системные вызовы способны выполняться 
+Некоторые системные вызовы способны выполняться асинхронно, в этом помогают механизмы самих операционных систем: [epoll] (Linux), [kqueue](https://en.wikipedia.org/wiki/Kqueue) (MacOS, BSD), [IOCP](https://en.wikipedia.org/wiki/Input/output_completion_port) (Windows)
