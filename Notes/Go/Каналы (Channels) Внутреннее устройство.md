@@ -269,3 +269,5 @@ go func() {
 }
 ```
 
+
+### time.Tick()
