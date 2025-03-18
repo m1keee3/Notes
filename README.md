@@ -3,8 +3,7 @@
 Этот репозиторий содержит конспекты по различным темам. Структура файлов организована для удобного поиска и использования материалов.
 
 ## ✅ Управление задачами
-Мой **ToDo List**:
-[➡️ Открыть ToDo List](https://m1keee.yonote.ru/doc/todo-list-3X8Db7NJZI?v=794a5f95-8e71-45c9-b96c-83e394ca70c4)
+Мой **ToDo List**: [➡️ Открыть ToDo List](https://m1keee.yonote.ru/doc/todo-list-3X8Db7NJZI?v=794a5f95-8e71-45c9-b96c-83e394ca70c4)
 
 Yonote группы: [➡️ Yonote M3205](https://itmo-se-m3205.yonote.ru/share/0d1946ff-cd8d-41bf-aff6-ae4379cce372)
 
