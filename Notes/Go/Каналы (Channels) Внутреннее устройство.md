@@ -275,5 +275,19 @@ go func() {
 `time.Tick()` - создает канал, который будет посылать сигналы постоянно через заданный промежуток времени.
 
 ```
-ticker := time.Tick(time.Second) count := 0 for { <-ticker fmt.Println("очередной тик") count++ if count == 3 { break } }
+ticker := time.Tick(time.Second) 
+
+count := 0 
+for { 
+	<-ticker 
+	fmt.Println("tick") 
+	count++ 
+	if count == 3 { 
+		break 
+	} 
+}
+
+//tick
+//tick 
+//tick
 ```
