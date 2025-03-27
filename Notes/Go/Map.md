@@ -1,12 +1,12 @@
 ##### Инициализация
-```
+```go
 1. m := map[string]int{}
 2. m := make(map[string]int, n) // n - число элементов
 ```
 
 Как не надо: 
 
-```
+```go
 var m map[int]int  // Объявляем, но не инициализируем map
 m[12] = 3          // Попытка записи в nil map
 fmt.Println(m)
@@ -19,7 +19,7 @@ fmt.Println(m)
 
 Как выглядит map header:
 
-```
+```go
 type hmap struct {
     count      int    // количество элементов
     B          uint8  // log2(количество бакетов)
@@ -50,7 +50,7 @@ Map не использует `generics` или `interface{}`, а использ
 #### Type descriptor
 Хранит всю мета информацию о типе
 Предоставляет операции hash, equal, copy
-```
+```go
 type _type struct {
 	size uintptr
 	equal func(unsafe.Pointer, unsafe.Pointer)bool
@@ -61,7 +61,7 @@ type _type struct {
 
 #### Map type
 Хранит в себе информацию о значениях с которыми он работает (type discriptor)
-```
+```go
 type mapType struct {
 	key *_type
 	value *_type
@@ -101,7 +101,7 @@ Map в Golang использует гибридную адресацию:
 Количество бакетов в map всегда степень двойки
 Хранит максимум 8 элементов
 
-```
+```go
 type bucket struct {
     tophash [8]uint8  // High order bits для ускоренного поиска
     keys    [8]K      // Ключи
@@ -159,7 +159,7 @@ hash & (num_buckets - 1) = $101110_2$ & $0111_2$ = $000110_2$
 Находит элемент по алгоритму поиска
 После чего помечает его tophash нулем
 
-```
+```go
 tophash:  [23, 67, 0, 89, 0, 102, 0, 45]  // 0 - означает удалённый элемент
 keys:     [K1, K2, nil, K4, nil, K6, nil, K8]
 values:   [V1, V2, nil, V4, nil, V6, nil, V8]
@@ -173,7 +173,7 @@ values:   [V1, V2, nil, V4, nil, V6, nil, V8]
 
 Тратит много ресурсов поэтому стоит выделять память под map:
 
-```
+```go
 m := make(map[string]int, 1000)
 ```
 

@@ -1,6 +1,6 @@
 ### Errors
 
-```
+```go
 type error interface {
     Error() string // возвращает строковое описание ошибки
 }
@@ -8,7 +8,7 @@ type error interface {
 
 **Пример функции использующей Error**
 
-```
+```go
 func divide(a, b int) (int, error) {
     if b == 0 {
         return 0, errors.New("division by zero") // в пакете errors
@@ -19,7 +19,7 @@ func divide(a, b int) (int, error) {
 
 **Пример реализации своего класса error**
 
-```
+```go
 type DivisionError struct {
     dividend int
     divisor  int
@@ -32,7 +32,7 @@ func (e *DivisionError) Error() string {
 
 **Существует возможность обертывания ошибки с добавлением в нее контекста при помощи fmt.Errorf**
 
-```
+```go
 func step1() error {
     return errors.New("error in step1")
 }
@@ -86,7 +86,7 @@ func main() {
 
 **Пример:**
 
-```
+```go
 a := 1  
 defer fmt.Println("first defer", a)  
 defer fmt.Println("second defer", a)  
@@ -104,7 +104,7 @@ first defer 1
 
 #### Интересный пример с замыканием
 
-```
+```go
 func sum(a, b int) (sum int) {
 	defer func() {
 		sum *= 2
@@ -125,7 +125,7 @@ fmt.Print(sum(2, 3)) // 10
 
 **Пример:**
 
-```
+```go
 func cleanup() {
     fmt.Println("Cleaning up resources...")
 }
@@ -157,7 +157,7 @@ panic: Something went wrong!
 
 **Пример:**
 
-```
+```go
 func handlePanic() {
     if r := recover(); r != nil {
         fmt.Println("Recovered from panic:", r)

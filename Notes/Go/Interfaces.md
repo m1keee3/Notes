@@ -2,7 +2,7 @@
 
 Рассмотрим  такой пример:
 
-```
+```go
 type Word struct {  
     name     string  
     priority uint  
@@ -41,7 +41,7 @@ func main() {
     
 - **Динамическое значение** (конкретное значение).
 
-```
+```go
 type iface struct {
 	tab  *itab
 	data unsafe.Pointer
@@ -50,7 +50,7 @@ type iface struct {
 
 `data` - это непосредственно наш f1 из примера. Вся информация по методам, типам и прочему скрывается в `tab` - интерфейсной таблицей (interface table).
 
-```
+```go
 type itab struct {
 	inter *interfacetype
 	_type *_type
@@ -79,7 +79,7 @@ f.tab.fun[0](f.data)
 
 Если изменим реализацию метода - то все упадет как надо:
 
-```
+```go
 func (w *Word) foo() {
 	fmt.Printf("call foo(): %s\n", w.name)
 }
@@ -90,7 +90,7 @@ func (w *Word) foo() {
 
 #### Встраивание интерфейсов
 
-```
+```go
 type Reader interface {
 	Read(p []byte) (n int, err error)
 }
@@ -110,7 +110,7 @@ type ReadCloser interface {
 Пустой интерфейс — это интерфейс, который не требует никаких методов. Он может хранить значение любого типа, поскольку все типы реализуют как минимум нулевое количество методов.
 Пустой интерфейс часто используется в функциях, которые должны работать с данными любого типа, например, `fmt.Println`.
 
-```
+```go
 func Println(a ...interface{}) { ... }
 ```
 
@@ -121,7 +121,7 @@ func Println(a ...interface{}) { ... }
 
 **Утверждение типа (type assertion)** - это извлечение определенного типа из пустого интерфейса
 
-```
+```go
 var i interface{} = "hello"
 
 s := i.(string)
@@ -132,7 +132,7 @@ fmt.Println(s)
 
 Чтобы избежать паники надо обрабатывать возможную ошибку:
 
-```
+```go
 s, ok := i.(string)
 if ok {
     fmt.Println(s)
@@ -143,7 +143,7 @@ if ok {
 
 #### Переключение типов (Type Switch)
 
-```
+```go
 func Describe(v interface{}) {
     switch v := v.(type) {
     case int:
@@ -163,7 +163,7 @@ func Describe(v interface{}) {
 
 **Error interface** позволяет реализовывать кастомные error
 
-```
+```go
 type error interface {
     Error() string
 }

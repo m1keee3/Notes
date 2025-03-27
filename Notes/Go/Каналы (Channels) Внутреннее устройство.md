@@ -9,7 +9,7 @@
 
 #### Структура
 
-```
+```go
 type hchan struct {  
     qcount   uint           // Количество элементов в буфере  
 	dataqsiz uint           // Размерность буфера  
@@ -43,7 +43,7 @@ var nilChan chan int
 strChan := make(chan string)
 ```
 
-```
+```go
 type hchan struct {
 	mx      sync.mutex  
 	buffer  []T          // у буферизированных  
@@ -61,7 +61,7 @@ type hchan struct {
 
 `Len & Cap` не буферизированного канала всегда равны 0
 
-```
+```go
 var nilChan chan int  
 intChan := make(chan int)  
 intBufChan := make(chan int, 10)  
@@ -87,7 +87,7 @@ fmt.Printf("len %d, cap %d\n", len(intBufChan), cap(intBufChan))
 Это значит что данные копируются из **стэкфрейма** одной горутины в **стэкфрэйм** другой.
 
 
-```
+```go
 var nilChan chan int
 nilChan <- 10 // Запись в пустой канале приводит к Deadlock
 ```
@@ -96,7 +96,7 @@ nilChan <- 10 // Запись в пустой канале приводит к D
 
 Эта операция запрещает запись в канал, но чтение из закрытого канала не запрещено.
 
-```
+```go
 chan nilChan chan int
 close(nilChan) // panic: close of nil channel
 ```
@@ -107,7 +107,7 @@ close(nilChan) // panic: close of nil channel
 
 Запись в закрытый канал
 
-```
+```go
 ch := make(chan int)  
 close(ch)  
 ch <- 1
@@ -117,7 +117,7 @@ ch <- 1
 
 Закрытие закрытого канала
 
-```
+```go
 ch := make(chan int)  
 close(ch)  
 close(ch)
@@ -127,7 +127,7 @@ close(ch)
 
 Из закрытого канала возможно чтение, и при этом не надо очередь на запись будет пуста, но выводиться будут стандартные значения для этого типа:
 
-```
+```go
 ch := make(chan int)  
 close(ch)  
 for true {  
@@ -141,7 +141,7 @@ for true {
 
 Для того чтобы закончить чтение когда закончатся значения можно обрабатывать `bool` переменную возвращаемую методом `<-`.
 
-```
+```go
 ch := make(chan int)  
 close(ch)  
 
@@ -158,7 +158,7 @@ for true {
 
 Или использовать ключевое слово `range`:
 
-```
+```go
 for a := range ch {
 	fmt.Println(a)
 }
@@ -168,7 +168,7 @@ for a := range ch {
 
 #### Буферизированный канал
 
-```
+```go
 bufChan := make(chan int, 5) // Создает канал с cap = 5
 ```
 
@@ -181,19 +181,19 @@ bufChan := make(chan int, 5) // Создает канал с cap = 5
 
 Канал для чтения
 
-```
+```go
 readChan := make(<-chan int)
 ```
 
 Канал для записи
 
-```
+```go
 writeChan := make(chan<- int)
 ```
 
 Создание таких каналов не имеет смысла, это нужно для того чтобы показать как функция будет работать с каналом, то есть используется в **сигнатурах функций**.
 
-```
+```go
 func foo(ch <-chan int) {} 
 ```
 
@@ -208,7 +208,7 @@ func foo(ch <-chan int) {}
 
 #### Основной синтаксис:
 
-```
+```go
 select {
 case msg1 := <-ch1:
     fmt.Println("Получено из ch1:", msg1)
@@ -238,7 +238,7 @@ default:
 
 Используется для таймаутов, задержек и работы с `select`.
 
-```
+```go
 select { 
 case msg := <-ch: 
 	fmt.Println(msg)
@@ -250,7 +250,7 @@ case <-time.After(2 * time.Second):
 
 Если запускается в **цикле** то таймер надо выносить из него:
 
-```
+```go
 timer := time.After(time.Second) // timer outside the loop
 
 go func() {
@@ -274,7 +274,7 @@ go func() {
 
 `time.Tick()` - создает канал, который будет посылать сигналы постоянно через заданный промежуток времени.
 
-```
+```go
 ticker := time.Tick(time.Second) 
 
 count := 0 

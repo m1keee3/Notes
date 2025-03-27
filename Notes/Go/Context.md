@@ -28,7 +28,7 @@ ctx := context.TODO()
 
 Создаёт контекст, который можно отменить вручную.
 
-```
+```go
 ctx, cancel := context.WithCancel(context.Background())
 
 fmt.Println(ctx.Err()) // <nil> еще нет ошибки контекста
@@ -48,7 +48,7 @@ fmt.Println(ctx.Err()) // context canceled
 
 Контекст отменяется через указанное время.
 
-```
+```go
 ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 defer cancel() // Важно вызывать cancel(), чтобы избежать утечек
 
@@ -64,7 +64,7 @@ case <-ctx.Done():
 
 Похож на `WithTimeout`, но задаёт точный момент завершения.
 
-```
+```go
 deadline := time.Now().Add(2 * time.Second)
 ctx, cancel := context.WithDeadline(context.Background(), deadline)
 defer cancel()
@@ -82,7 +82,7 @@ case <-ctx.Done():
 
 Позволяет передавать и хранить значения в контексте.
 
-```
+```go
 ctx := context.WithValue(context.Background(), "userID", 42)
 
 func process(ctx context.Context) {
