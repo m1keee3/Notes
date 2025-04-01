@@ -92,11 +92,11 @@ User-Agent: Mozilla/5.0
 
 Сервер отвечает:
 
-Copy
-
+```
 HTTP/1.1 200 OK
 Content-Type: text/html
 Content-Length: 1234
 
 <!DOCTYPE html>
 <html>...</html>
+```
