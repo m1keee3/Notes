@@ -81,3 +81,22 @@ HTTP — это **клиент-серверный протокол** для п
     
 - Поддерживает различные методы запросов (`GET`, `POST`, `PUT`, `DELETE` и др.).
 
+**Пример:**  
+Когда вы открываете сайт `example.com`, браузер отправляет запрос:
+
+```
+GET /index.html HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0
+```
+
+Сервер отвечает:
+
+Copy
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1234
+
+<!DOCTYPE html>
+<html>...</html>
