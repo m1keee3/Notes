@@ -7,6 +7,13 @@
 
 Yonote группы: [➡️ Yonote M3205](https://itmo-se-m3205.yonote.ru/share/0d1946ff-cd8d-41bf-aff6-ae4379cce372)
 
+[➡️ Проектирование баз данных](https://dbcourse.yonote.ru/share/f98c9944-26e2-4e74-8a2e-24aea060e163)
+
+[➡️ English](https://docs.google.com/spreadsheets/d/14tKzZ2Rg7NqjFr3dupB3FhUULDTxaiTgD3yGnc0O95Y/edit?usp=sharing)
+
+[➡️ History](https://docs.google.com/spreadsheets/d/18o3ozJoDPah-_2qVHbej8ZQlStwmudVLMiW-L8DCWng/edit?gid=0)
+
+
 ## 🔖 Структура
 - **Go/** – материалы по языку программирования Go.
 - **Алгоритмы/** – разбор и реализация алгоритмов.
