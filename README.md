@@ -13,6 +13,8 @@ English: [➡️ Score](https://docs.google.com/spreadsheets/d/14tKzZ2Rg7NqjFr3d
 
 [➡️ History](https://docs.google.com/spreadsheets/d/18o3ozJoDPah-_2qVHbej8ZQlStwmudVLMiW-L8DCWng/edit?gid=0)
 
+[➡️ OS](https://docs.google.com/spreadsheets/d/1rYXBpTrycKdjybKnblJLakq1XeQ1dmCzZR-lCPlI_24/edit?gid=370015479#gid=370015479)
+
 
 ## 🔖 Структура
 - **Go/** – материалы по языку программирования Go.
