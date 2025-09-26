@@ -38,3 +38,24 @@ EXPOSE 8080
 ENV NODE_ENV=production
 CMD ["node", "app.js"]
 ```
+
+Запуск **Go приложения**
+
+```dockerfile
+FROM golang:1.21-alpine  
+  
+WORKDIR /app  
+  
+RUN apk add --no-cache git  
+  
+COPY go.mod go.sum ./  
+RUN go mod download  
+  
+COPY . .  
+  
+RUN go build -o simulator main.go  
+  
+EXPOSE 2112  
+  
+CMD ["./simulator"]
+```
