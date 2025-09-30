@@ -1,1 +1,0 @@
-REST и gRPC а также WebSocket и WebHook
