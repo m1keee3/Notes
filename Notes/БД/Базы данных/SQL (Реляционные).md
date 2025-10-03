@@ -1,4 +1,3 @@
-CRUD
 Sql - ACID
 NoSql - BASE
 Уровни изоляции
