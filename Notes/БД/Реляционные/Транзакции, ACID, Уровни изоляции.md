@@ -21,7 +21,7 @@
 
 ### Read Uncommited
 
-Д
+**Read Uncommited** - это самый 
 
 1. Проблема грязного чтения 
 	![[Pasted image 20251029154437.png]]
