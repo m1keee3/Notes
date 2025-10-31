@@ -72,3 +72,8 @@ ON Condition]
 7. `SELECT`
 8. `DISTINCT`
 9. `ORDER BY`
+
+---
+
+## Join
+
