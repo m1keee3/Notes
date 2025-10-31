@@ -12,7 +12,7 @@
 	
 Далее указываются имена столбцов (также возможны их алиасы) или `*`, которая определяет вывод всех столбцов отношения
     
-2. **Выбор исходного отношения**:[3](https://pelmesh619.github.io/itmo_conspects/databases/databases_superconspect.html#fn:fromfootnote)
+2. **Выбор исходного отношения**:
     
 ```
  FROM TableName [AS NewTableName] 
