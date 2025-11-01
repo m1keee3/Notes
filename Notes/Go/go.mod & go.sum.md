@@ -5,7 +5,14 @@
 
 Пример:
 
-`module github.com/m1keee/myapp  go 1.22  require (     github.com/gin-gonic/gin v1.9.1     golang.org/x/crypto v0.21.0 )`
+```go
+module github.com/m1keee/myapp
+go 1.22  
+require (
+     github.com/gin-gonic/gin v1.9.1     
+     golang.org/x/crypto v0.21.0
+)
+```
 
 **Что здесь есть:**
 
@@ -31,7 +38,12 @@
 
 Пример:
 
-`github.com/gin-gonic/gin v1.9.1 h1:Zt4SZq2s... github.com/gin-gonic/gin v1.9.1/go.mod h1:0uAq2u... golang.org/x/crypto v0.21.0 h1:bYcgKnT... golang.org/x/crypto v0.21.0/go.mod h1:tV5R...`
+```go
+github.com/gin-gonic/gin v1.9.1 h1:Zt4SZq2s... 
+github.com/gin-gonic/gin v1.9.1/go.mod h1:0uAq2u... 
+golang.org/x/crypto v0.21.0 h1:bYcgKnT... 
+golang.org/x/crypto v0.21.0/go.mod h1:tV5R...
+```
 
 **Что здесь есть:**
 
