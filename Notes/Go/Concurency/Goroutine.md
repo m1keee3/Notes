@@ -25,7 +25,7 @@ type g struct {
     schedlink    guintptr  
     waitsince    int64        
     waitreason   waitReason 
-  
+	
     preempt       bool 
     preemptStop   bool 
      
@@ -118,6 +118,6 @@ type stack struct {
 }
 ```
 
-Горутина [**_стартует_**](https://github.com/golang/go/blob/f296b7a6f045325a230f77e9bda1470b1270f817/src/runtime/proc.go#L3410) с минимального размера стека в [**_2 килобайта_**](https://github.com/golang/go/blob/f296b7a6f045325a230f77e9bda1470b1270f817/src/runtime/stack.go#L72), который увеличивается и уменьшается по мере необходимости без риска когда-либо закончиться.
+Горутина [**_стартует_**](https://github.com/golang/go/blob/f296b7a6f045325a230f77e9bda1470b1270f817/src/runtime/proc.go#L3410) с минимального размера стека в [**_2 килобайта_**](https://github.com/golang/go/blob/f296b7a6f045325a230f77e9bda1470b1270f817/src/runtime/stack.go#L72), который увеличивается и уменьшается по мере необходимости.
 
 Хотя минимальный размер стека определен как 2048 байтов, рантайм Go также не позволяет горутинам превышать [максимальный размер стека](https://github.com/golang/go/blob/f296b7a6f045325a230f77e9bda1470b1270f817/src/runtime/stack.go#L1031); этот максимум зависит от архитектуры и составляет [1 ГБ для 64-разрядных систем и 250 МБ для 32-разрядных](https://github.com/golang/go/blob/f296b7a6f045325a230f77e9bda1470b1270f817/src/runtime/proc.go#L120) систем.
