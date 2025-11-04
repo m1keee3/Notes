@@ -1,6 +1,2 @@
-```go
+Хорошая статья по теме [тут](https://habr.com/ru/companies/otus/articles/527748/)
 
-func  debounce(fn func(), d time.Duration) {
-}
-
-```
