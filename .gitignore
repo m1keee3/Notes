@@ -1,0 +1,15 @@
+# Личные настройки Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/hotkeys.json
+
+# Кеш и временные файлы
+.obsidian/cache/
+.trash/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+Yawork/
+yawork/

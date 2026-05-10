@@ -1,0 +1,110 @@
+---
+tags: [go, concurrency, context, backend]
+---
+
+- **Отмена операций** – позволяет прервать выполнение горутин при истечении времени или внешнем сигнале.
+	
+- **Передача данных** – можно передавать значения между функциями.
+	
+- **Дедлайны и тайм-ауты** – можно задать временные ограничения на выполнение задач.
+
+### Создание контекста
+
+В `context` есть несколько способов его создания:
+
+##### 1. `context.Background()`
+
+Используется как корневой контекст.
+
+```
+ctx := context.Background()
+```
+
+##### 2. `context.TODO()`
+
+Применяется, если пока не ясно, какой контекст использовать.
+
+```
+ctx := context.TODO()
+```
+
+##### 3. `context.WithCancel(parent)`
+
+Создаёт контекст, который можно отменить вручную.
+
+```go
+ctx, cancel := context.WithCancel(context.Background())
+
+fmt.Println(ctx.Err()) // <nil> еще нет ошибки контекста
+
+go func() {
+    time.Sleep(2 * time.Second)
+    cancel() // Отмена контекста
+}()
+
+<-ctx.Done()
+fmt.Println(ctx.Err()) // context canceled 
+```
+
+Контекст лучше отменять на том же уровне где он создается.
+
+##### 4. `context.WithTimeout(parent, duration)`
+
+Контекст отменяется через указанное время.
+
+```go
+ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+defer cancel() // Важно вызывать cancel(), чтобы избежать утечек
+
+select {
+case <-time.After(5 * time.Second):
+    fmt.Println("Операция завершена")
+case <-ctx.Done():
+    fmt.Println("Контекст завершился:", ctx.Err())
+}
+```
+
+##### 5. `context.WithDeadline(parent, time)`
+
+Похож на `WithTimeout`, но задаёт точный момент завершения.
+
+```go
+deadline := time.Now().Add(2 * time.Second)
+ctx, cancel := context.WithDeadline(context.Background(), deadline)
+defer cancel()
+
+select {
+case <-time.After(3 * time.Second):
+    fmt.Println("Операция выполнена")
+case <-ctx.Done():
+    fmt.Println("Контекст завершён:", ctx.Err())
+}
+
+```
+
+##### 6. `context.WithValue(parent, key, value)`
+
+Позволяет передавать и хранить значения в контексте.
+
+```go
+ctx := context.WithValue(context.Background(), "userID", 42)
+
+func process(ctx context.Context) {
+    if v := ctx.Value("userID"); v != nil {
+        fmt.Println("UserID:", v)
+    }
+}
+
+process(ctx)
+
+```
+
+
+
+---
+
+## Related
+- [[Goroutine|Goroutine]] — контексты передаются между горутинами для сигнала отмены
+- [[Каналы (Channels) Внутреннее устройство|Channels]] — context.Done() возвращает канал; отмена закрывает его
+- [[Concurency|Concurrency Patterns]] — контекст используется в Worker Pool и Pipeline для graceful shutdown
+- [[Projects/Finly/README|Finly]] — gRPC вызовы между сервисами передают контекст для контроля таймаутов
