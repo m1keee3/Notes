@@ -24,6 +24,3 @@ tags: [backend, moc]
 ## Другое
 - [[compute & io bound]] — CPU-bound vs I/O-bound
 - [[Deploy]] — стратегии деплоя
-
-## Проекты
-- [[Projects/Finly/README|Finly]] — все технологии этого vault в одном проекте
