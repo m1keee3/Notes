@@ -101,7 +101,7 @@ nilChan <- 10 // Запись в пустой канале приводит к D
 Эта операция запрещает запись в канал, но чтение из закрытого канала не запрещено.
 
 ```go
-chan nilChan chan int
+var nilChan chan int
 close(nilChan) // panic: close of nil channel
 ```
 
